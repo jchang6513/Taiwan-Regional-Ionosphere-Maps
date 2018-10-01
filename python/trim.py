@@ -1,3 +1,9 @@
+import datetime
+import numpy as np
+import matplotlib
+matplotlib.use('AGG')
+import matplotlib.pyplot as plt
+
 def read_trim(fdir):
     mn = 0;
     f = open(fdir, 'r')

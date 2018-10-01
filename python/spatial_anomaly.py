@@ -1,19 +1,16 @@
 import os
 import glob
 import datetime
-import numpy as np
 import trim
+import numpy as np
 import pandas as pd
-import matplotlib
-matplotlib.use('AGG')
 import matplotlib.pyplot as plt
 
-
-rimdir = 'TRIM' # rim root directory, follow with year.doy directories
-dates = pd.date_range(start='20180211 00:00',end='20180214 00:00', freq='H') # observation date range
+rimdir = '../TWRR/' # rim root directory, follow with year.doy directories
+dates = pd.date_range(start='20180213 00:00',end='20180214 00:00', freq='H') # observation date range
 K = 1.5 
 mday = 15 # median day
-fdir = 'temp1/'; # root directory of output image
+fdir = 'img/'; # root directory of output image
 
 TEC = np.empty([mday+1,31,25])
 tec = np.empty([31,25])
@@ -54,28 +51,34 @@ for date in dates:
 	fname = fdir+date.strftime('%Y.%j/')+fName+'.00.O.png'
 	print(fname)
 	fig.savefig(fname,dpi=150)
+	fig.clf()
 	
 	fig = trim.plot_trim(mTEC, state, '(M)', 0, 50, 'jet')
 	fname = fdir+date.strftime('%Y.%j/')+fName+'.00.M.png'
 	print(fname)
 	fig.savefig(fname,dpi=150)
+	fig.clf()
 	
 #	fig = trim.plot_trim(oTEC-mTEC, state, '(O-M)', -20, 20, 'bwr')
 #	fname = fdir+date.strftime('%Y.%j/')+fName+'.00.om.png'
 #	print(fname)
 #	fig.savefig(fname,dpi=150)
+#	fig.clf()
 	
 #	fig = trim.plot_trim(oTEC-uTEC, state, '(O-UB)', 0, 20, 'Reds')
 #	fname = fdir+date.strftime('%Y.%j/')+fName+'.00.OU.png'
 #	print(fname)
 #	fig.savefig(fname,dpi=150)
+#	fig.clf()
 
 #	fig = trim.plot_trim(oTEC-lTEC, state, '(O-LB)', 20, 0, 'Blues')
 #	fname = fdir+date.strftime('%Y.%j/')+fName+'.00.OL.png'
 #	print(fname)
 #	fig.savefig(fname,dpi=150)
+#	fig.clf()
 
 	fig = trim.plot_trim(ob, state, '(O-B)', -20, 20, 'bwr')
 	fname = fdir+date.strftime('%Y.%j/')+fName+'.00.OB.png'
 	print(fname)
 	fig.savefig(fname,dpi=150)
+	fig.clf()
